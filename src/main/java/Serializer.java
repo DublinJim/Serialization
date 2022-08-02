@@ -19,12 +19,11 @@ public class Serializer {
         User user = null;
 
         try {
-            FileInputStream fileIn = new FileInputStream(
-                "C:\\Users\\james.keogh\\IdeaProjects\\Serialization\\file.ser");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
+
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(
+                "file.ser"));
             user = (User) in.readObject();
             in.close();
-            fileIn.close();
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

@@ -22,7 +22,7 @@ public class Demo {
         user.name = "Joe";
         user.password = "password";
 
-        user.sayHello();
+
 
         try {
             FileOutputStream fileOut = new FileOutputStream("file.ser");
