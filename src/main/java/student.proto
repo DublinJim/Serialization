@@ -1,0 +1,28 @@
+syntax = "proto2";
+
+
+package protoClasses;
+
+
+option java_multiple_files = true;
+
+message Student{
+  required string name = 1;
+  required int32 id = 2;
+
+  enum PhoneType{
+
+    MOBILE = 1;
+    HOME = 2;
+  }
+  optional PhoneType phonetype = 3;
+
+  enum ClassYear{
+    FRESHMAN = 1;
+    SOPHOMORE = 2;
+    JUNIOR = 3;
+    SENIOR = 4;
+
+  }
+  optional ClassYear classyear = 5;
+}

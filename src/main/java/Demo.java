@@ -1,6 +1,10 @@
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import protoClasses.Student;
+import protoClasses.Student.ClassYear;
+import protoClasses.Student.PhoneType;
+
 
 public class Demo {
 
@@ -21,6 +25,14 @@ public class Demo {
 
         user.name = "Joe";
         user.password = "password";
+
+        Student student1 = Student.newBuilder()
+            .setId(34)
+            .setName("Joe")
+            .setPhonetype(PhoneType.MOBILE)
+            .setClassyear(ClassYear.SENIOR)
+            .build();
+
 
 
 
