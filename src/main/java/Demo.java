@@ -47,7 +47,7 @@ public class Demo {
 
         objOut.writeObject(student1);
         Server server = new Server();
-        server.showStudent();
+
 
     }
 }

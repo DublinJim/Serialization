@@ -8,42 +8,29 @@ import protoClasses.Student;
 public class Server {
 
     public static final int PORT = 3191;
-    ServerSocket serverSocket;
-    Socket socket;
-    ObjectOutputStream objOut;
-    ObjectInputStream objIn;
-    Student student;
+    static ServerSocket serverSocket;
+    static Socket socket;
+    static ObjectOutputStream objOut;
+    static ObjectInputStream objIn;
+    static Student student;
 
 
 
-    {
-        try {
-            serverSocket = new ServerSocket(PORT);
-            socket = serverSocket.accept();
-            objOut = new ObjectOutputStream(socket.getOutputStream());
-            objIn = new ObjectInputStream(socket.getInputStream());
 
-            student = (Student) objIn.readObject();
-            objIn.close();
-            objOut.close();
-            serverSocket.close();
-            socket.close();
-            System.out.println(student);
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        serverSocket = new ServerSocket(PORT);
+        socket = serverSocket.accept();
+        objOut = new ObjectOutputStream(socket.getOutputStream());
+        objIn = new ObjectInputStream(socket.getInputStream());
 
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public void showStudent()
-    {
+        student = (Student) objIn.readObject();
+        objIn.close();
+        objOut.close();
+        serverSocket.close();
+        socket.close();
         System.out.println(student);
     }
 
 
-    public Student getStudent() {
-        return student;
-    }
 
 }
