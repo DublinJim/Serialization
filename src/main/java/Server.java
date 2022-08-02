@@ -12,6 +12,8 @@ public class Server {
     Socket socket;
     ObjectOutputStream objOut;
     ObjectInputStream objIn;
+    Student student;
+
 
 
     {
@@ -21,7 +23,7 @@ public class Server {
             objOut = new ObjectOutputStream(socket.getOutputStream());
             objIn = new ObjectInputStream(socket.getInputStream());
 
-            Student student =(Student) objIn.readObject();
+            student = (Student) objIn.readObject();
             objIn.close();
             objOut.close();
             serverSocket.close();
@@ -33,4 +35,15 @@ public class Server {
         }
 
     }
+
+    public void showStudent()
+    {
+        System.out.println(student);
+    }
+
+
+    public Student getStudent() {
+        return student;
+    }
+
 }

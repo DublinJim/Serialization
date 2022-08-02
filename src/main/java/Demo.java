@@ -1,6 +1,9 @@
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 import protoClasses.Student;
 import protoClasses.Student.ClassYear;
 import protoClasses.Student.PhoneType;
@@ -8,7 +11,7 @@ import protoClasses.Student.PhoneType;
 
 public class Demo {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("Begin");
 
         //					Steps to Serialize
@@ -21,7 +24,10 @@ public class Demo {
         //					6. out.close(); fileOut.close();
         //					---------------------------------------------------------------
 
-
+        ServerSocket serverSocket;
+    
+        ObjectOutputStream objOut = null;
+        ObjectInputStream objIn;
 
         Student student1 = Student.newBuilder()
             .setId(34)
@@ -29,20 +35,19 @@ public class Demo {
             .setPhonetype(PhoneType.MOBILE)
             .setClassyear(ClassYear.SENIOR)
             .build();
-
-
-
-
+            
+        
+        Socket socket=new Socket("127.0.0.1", Server.PORT);
         try {
-            FileOutputStream fileOut = new FileOutputStream("file.ser");
-            ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
-            objOut.writeObject(student1);
-            objOut.close();
-            fileOut.close();
-
+            objOut = new ObjectOutputStream(socket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
+        objIn = new ObjectInputStream(socket.getInputStream());
+
+        objOut.writeObject(student1);
+        Server server = new Server();
+        server.showStudent();
 
     }
 }
