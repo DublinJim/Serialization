@@ -21,10 +21,7 @@ public class Demo {
         //					6. out.close(); fileOut.close();
         //					---------------------------------------------------------------
 
-        User user = new User();
 
-        user.name = "Joe";
-        user.password = "password";
 
         Student student1 = Student.newBuilder()
             .setId(34)
@@ -39,7 +36,7 @@ public class Demo {
         try {
             FileOutputStream fileOut = new FileOutputStream("file.ser");
             ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
-            objOut.writeObject(user);
+            objOut.writeObject(student1);
             objOut.close();
             fileOut.close();
 

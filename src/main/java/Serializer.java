@@ -1,6 +1,7 @@
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import protoClasses.Student;
 
 public class Serializer {
 
@@ -16,20 +17,18 @@ public class Serializer {
         //					6. in.close(); fileIn.close();
         //					---------------------------------------------------------------
 
-        User user = null;
+        Student student=null;
 
         try {
 
             ObjectInputStream in = new ObjectInputStream(new FileInputStream(
                 "file.ser"));
-            user = (User) in.readObject();
+            student = (Student) in.readObject();
             in.close();
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        assert user != null;
-        user.sayHello();
-        System.out.println(user);
+        System.out.println(student);
     }
 }
