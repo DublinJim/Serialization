@@ -1,4 +1,3 @@
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -25,19 +24,19 @@ public class Demo {
         //					---------------------------------------------------------------
 
         ServerSocket serverSocket;
-    
+
         ObjectOutputStream objOut = null;
         ObjectInputStream objIn;
 
+        //create the object here
         Student student1 = Student.newBuilder()
             .setId(34)
             .setName("Joe")
             .setPhonetype(PhoneType.MOBILE)
             .setClassyear(ClassYear.SENIOR)
             .build();
-            
-        
-        Socket socket=new Socket("127.0.0.1", Server.PORT);
+
+        Socket socket = new Socket("127.0.0.1", Server.PORT);
         try {
             objOut = new ObjectOutputStream(socket.getOutputStream());
         } catch (IOException e) {
@@ -45,8 +44,13 @@ public class Demo {
         }
         objIn = new ObjectInputStream(socket.getInputStream());
 
+        //send the object here
+        assert objOut != null;
         objOut.writeObject(student1);
-        Server server = new Server();
+
+        //now close the sockets
+        objOut.close();
+        socket.close();
 
 
     }
